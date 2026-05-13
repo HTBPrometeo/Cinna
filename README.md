@@ -99,19 +99,35 @@ kill -9 -1
 
 # Showcase
 
+Environment demo
+
 ![Preview](./Showcase/base.png)
+
+Polybar & EWW bars
 
 ![Preview](./Showcase/bars.png)
 
-![Preview](./Showcase/shells.png)
+EWW widgets
 
 ![Preview](./Showcase/eww.png)
 
+User and Root shells
+
+![Preview](./Showcase/shells.png)
+
+Rofi app search bar theme
+
 ![Preview](./Showcase/rofi.png)
+
+Shell image preview plugin
 
 ![Preview](./Showcase/plugins.png)
 
+Starship folder git status
+
 ![Preview](./Showcase/repostat.png)
+
+Just a funny plugin for audio track
 
 ![Preview](./Showcase/cava_audio_waves.png)
 
