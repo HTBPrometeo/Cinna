@@ -7,7 +7,7 @@
 
 ---
 
-<details open>
+<details>
 <summary><h1>🇺🇸 English Installation</h1></summary>
 
 # 🇺🇸 English Installation
