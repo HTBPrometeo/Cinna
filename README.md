@@ -118,18 +118,5 @@ _Add screenshots or GIFs here_
 
 # Credits
 
-Huge thanks to all the developers and projects that made this customization possible.# 🐉 Kali BSPWM Installation Guide 🐉
-
-Welcome to my Kali Linux customization auto-install repository.  
-This project installs and configures my custom BSPWM environment automatically.
-
-Before starting, there are a few important things to note:
-
-- This setup was built and tested on a **Kali Linux virtual machine**
-    
-- It is **not intended for bare metal installations or cloud environments**
-    
-- I strongly recommend using a **fresh Kali image**
-    
-- Create a **VM snapshot** before installation in case anything fails
+Huge thanks to all the developers and projects that made this customization possible.
     
