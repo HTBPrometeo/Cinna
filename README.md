@@ -1,4 +1,6 @@
-# 🐉 Kali BSPWM Installation Guide 🐉
+<title align="center">
+🐉 Kali BSPWM Installation Guide 🐉
+</title>
 
 <p align="center">
   <a href="#-english-installation">🇺🇸 English</a> |
