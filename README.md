@@ -99,7 +99,14 @@ kill -9 -1
 
 # Showcase
 
-_Add screenshots or GIFs here_
+![Preview](./Showcase/base.png)
+![Preview](./Showcase/shells.png)
+![Preview](./Showcase/bars.png)
+![Preview](./Showcase/eww.png)
+![Preview](./Showcase/rofi.png)
+![Preview](./Showcase/plugins.png)
+![Preview](./Showcase/repostat.png)
+![Preview](./Showcase/imagen.png)
 
 ---
 
