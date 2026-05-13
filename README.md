@@ -106,7 +106,7 @@ kill -9 -1
 ![Preview](./Showcase/rofi.png)
 ![Preview](./Showcase/plugins.png)
 ![Preview](./Showcase/repostat.png)
-![Preview](./Showcase/imagen.png)
+![Preview](./Showcase/cava audio waves.png)
 
 ---
 
