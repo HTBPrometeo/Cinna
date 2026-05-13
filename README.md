@@ -63,11 +63,7 @@ chmod +x Autoinstall.sh
 
 During installation, the script will prompt you with a Starship shell configuration message.
 
-Type:
-
-```bash
-y
-```
+Type: `y`
 
 and continue with the installation.
 
