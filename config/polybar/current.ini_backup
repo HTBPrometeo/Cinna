@@ -1,0 +1,266 @@
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+;;
+;;                POLYBAR CONFIG
+;;
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[global/wm]
+margin-top = 42
+margin-bottom = 0
+
+;; =========================================================
+;; MAIN BAR BASE
+;; =========================================================
+
+[bar/main]
+monitor =
+monitor-fallback =
+monitor-strict = false
+
+bottom = false
+fixed-center = true
+
+width = 17%
+height = 12
+
+offset-x = 20
+offset-y = 0
+
+background = #1e1e2e
+foreground = #ffffff
+
+radius-top = 0
+radius-bottom = 1
+
+line-size = 0
+
+border-top-size = 0
+border-bottom-size = 0
+
+padding = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = "Iosevka Nerd Font:size=13;3"
+font-1 = "Iosevka Nerd Font:size=22;5"
+
+separator =
+spacing = 0
+dim-value = 1.0
+
+wm-name = polybar
+
+tray-position = none
+
+wm-restack = bspwm
+enable-ipc = true
+
+pseudo-transparency = false
+
+;; =========================================================
+;; TRANSPARENT BACKGROUND BAR
+;; =========================================================
+
+[bar/secondary]
+inherit = bar/main
+
+width = 100%
+height = 23
+
+offset-x = 0%
+offset-y = 0
+
+background = #cc2F343F
+foreground = #ffffff
+
+padding = 0
+
+radius-top = 0
+radius-bottom = 1
+
+modules-center = empty
+
+wm-restack = bspwm
+
+override-redirect = false
+
+;; =========================================================
+;; ETHERNET BAR
+;; =========================================================
+
+[bar/ethernet_bar]
+inherit = bar/main
+
+width = 18%
+height = 23
+
+offset-x = 8%
+offset-y = 0
+
+background = #1e1e2e
+foreground = #89b4fa
+
+padding = 1
+
+radius-top = 0
+radius-bottom = 1
+
+modules-left = slash-left
+modules-center = ethernet_status
+modules-right = slash-right
+
+wm-restack = bspwm
+
+override-redirect = false
+
+;; =========================================================
+;; VPN BAR
+;; =========================================================
+
+[bar/vpn_bar]
+inherit = bar/main
+
+width = 18%
+height = 23
+
+offset-x = 41%
+offset-y = 0
+
+background = #1e1e2e
+foreground = #a6e3a1
+
+padding = 1
+
+radius-top = 0
+radius-bottom = 1
+
+modules-left = slash-left
+modules-center = vpn_status
+modules-right = slash-right
+
+wm-restack = bspwm
+
+override-redirect = false
+
+;; =========================================================
+;; TARGET BAR
+;; =========================================================
+
+[bar/target_bar]
+inherit = bar/main
+
+width = 18%
+height = 23
+
+offset-x = 74%
+offset-y = 0
+
+background = #1e1e2e
+foreground = #f38ba8
+
+padding = 1
+
+radius-top = 0
+radius-bottom = 1
+
+modules-left = slash-left
+modules-center = target_status
+modules-right = slash-right
+
+wm-restack = bspwm
+
+override-redirect = false
+
+;; =========================================================
+;; EMPTY MODULE
+;; =========================================================
+
+[module/empty]
+type = custom/text
+content = " "
+content-padding = 999
+
+;; =========================================================
+;; LEFT SLASH
+;; =========================================================
+
+[module/slash-left]
+type = custom/text
+content = ""
+content-font = 1
+content-foreground = ${color.bg}
+
+;; =========================================================
+;; RIGHT SLASH
+;; =========================================================
+
+
+
+[module/slash-right]
+type = custom/text
+content = ""
+content-font = 1
+content-foreground = ${color.bg}
+
+;; =========================================================
+;; ETHERNET STATUS
+;; =========================================================
+
+[module/ethernet_status]
+type = custom/script
+interval = 2.0
+exec = ~/.config/bin/ethernet_status.sh
+
+format = <label>
+format-foreground = #89b4fa
+
+label = " %output% "
+
+;; =========================================================
+;; VPN STATUS
+;; =========================================================
+
+[module/vpn_status]
+type = custom/script
+interval = 2.0
+exec = ~/.config/bin/vpn_status.sh
+
+format = <label>
+format-foreground = #a6e3a1
+
+label = " %output% "
+
+;; =========================================================
+;; TARGET STATUS
+;; =========================================================
+
+[module/target_status]
+type = custom/script
+interval = 2.0
+exec = ~/.config/bin/target_to_hack.sh
+
+format = <label>
+format-foreground = #f38ba8
+
+label = " %output% "
+
+;; =========================================================
+;; SETTINGS
+;; =========================================================
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+
+throttle-input-for = 30
+
+screenchange-reload = false
+
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+pseudo-transparency = false

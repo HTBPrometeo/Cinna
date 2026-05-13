@@ -1,0 +1,59 @@
+#!/bin/sh
+
+workspaces() {
+
+ws1="I"
+ws2="II"
+ws3="III"
+ws4="IV"
+ws5="V"
+ws6="VI"
+
+occupied=$(bspc query -D -d .occupied --names)
+focused=$(bspc query -D -d focused --names)
+
+get_class() {
+    ws="$1"
+
+    if echo "$focused" | grep -qx "$ws"; then
+        echo "011"
+    elif echo "$occupied" | grep -qx "$ws"; then
+        echo "01"
+    else
+        echo "0"
+    fi
+}
+
+get_icon() {
+    ws="$1"
+
+    if echo "$focused" | grep -qx "$ws"; then
+        echo "󰮯"
+    else
+        echo ""
+    fi
+}
+
+c1=$(get_class "$ws1")
+c2=$(get_class "$ws2")
+c3=$(get_class "$ws3")
+c4=$(get_class "$ws4")
+c5=$(get_class "$ws5")
+c6=$(get_class "$ws6")
+
+i1=$(get_icon "$ws1")
+i2=$(get_icon "$ws2")
+i3=$(get_icon "$ws3")
+i4=$(get_icon "$ws4")
+i5=$(get_icon "$ws5")
+i6=$(get_icon "$ws6")
+
+echo "(box :class \"works\" :orientation \"v\" :halign \"center\" :valign \"start\" :space-evenly \"false\" :spacing \"-5\" (button :onclick \"bspc desktop -f $ws1\" :class \"$c1\" \"$i1\") (button :onclick \"bspc desktop -f $ws2\" :class \"$c2\" \"$i2\") (button :onclick \"bspc desktop -f $ws3\" :class \"$c3\" \"$i3\") (button :onclick \"bspc desktop -f $ws4\" :class \"$c4\" \"$i4\") (button :onclick \"bspc desktop -f $ws5\" :class \"$c5\" \"$i5\") (button :onclick \"bspc desktop -f $ws6\" :class \"$c6\" \"$i6\"))"
+
+}
+
+workspaces
+
+bspc subscribe desktop_focus desktop node_transfer node_add node_remove | while read -r _ ; do
+    workspaces
+done
