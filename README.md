@@ -100,13 +100,20 @@ kill -9 -1
 # Showcase
 
 ![Preview](./Showcase/base.png)
-![Preview](./Showcase/shells.png)
+
 ![Preview](./Showcase/bars.png)
+
+![Preview](./Showcase/shells.png)
+
 ![Preview](./Showcase/eww.png)
+
 ![Preview](./Showcase/rofi.png)
+
 ![Preview](./Showcase/plugins.png)
+
 ![Preview](./Showcase/repostat.png)
-![Preview](./Showcase/cava audio waves.png)
+
+![Preview](./Showcase/cava_audio_waves.png)
 
 ---
 
