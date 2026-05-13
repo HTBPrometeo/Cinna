@@ -25,6 +25,9 @@ Also ensure you do **not** have previous BSPWM/rice configurations already insta
 
 ```bash
 sudo apt update -y
+```
+
+```bash
 sudo apt upgrade -y
 ```
 
