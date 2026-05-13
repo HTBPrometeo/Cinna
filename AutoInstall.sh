@@ -24,7 +24,7 @@ libxcb-xfixes0-dev
 # Dependencias de sxhkd 
 sudo apt install -y libxcb-xkb-dev libxkbcommon-x11-dev
 
-# Instalar dependencias
+# Instalar dependencias adicionales
 sudo apt install -y build-essential maim bat lsd network-manager-tui fzf neovim ranger cava i3lock-fancy feh locate libdbusmenu-glib-dev dunst rofi imaegmagic cmatrix pkg-config zsh libdbusmenu-gtk3-dev rustc polybar libgtk-layer-shell-dev acpi libglib2.0-dev network-manager jq playerctl libgtk-3-dev brightnessctl libpango1.0-dev libgdk-pixbuf-2.0-dev git vim cargo libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libxcb-xkb-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev kitty libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xfixes0-dev meson ninja-build uthash-dev
 
 # Dependencias de picom
