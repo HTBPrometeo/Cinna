@@ -24,11 +24,11 @@ libxcb-xfixes0-dev
 # Dependencias de sxhkd 
 sudo apt install -y libxcb-xkb-dev libxkbcommon-x11-dev
 
-# Instalar dependencias adicionales
-sudo apt install -y build-essential maim bat lsd network-manager-tui fzf neovim ranger cava i3lock-fancy feh locate libdbusmenu-glib-dev dunst rofi imaegmagic cmatrix pkg-config zsh libdbusmenu-gtk3-dev rustc polybar libgtk-layer-shell-dev acpi libglib2.0-dev network-manager jq playerctl libgtk-3-dev brightnessctl libpango1.0-dev libgdk-pixbuf-2.0-dev git vim cargo libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libxcb-xkb-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev kitty libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xfixes0-dev meson ninja-build uthash-dev
+# Instalar dependencias
+sudo apt install -y build-essential maim bat lsd network-manager-tui fzf neovim ranger cava i3lock-fancy feh locate libdbusmenu-glib-dev dunst rofi imagemagick cmatrix pkg-config zsh libdbusmenu-gtk3-dev rustc polybar libgtk-layer-shell-dev acpi libglib2.0-dev network-manager jq playerctl libgtk-3-dev brightnessctl libpango1.0-dev libgdk-pixbuf-2.0-dev git vim cargo libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libxcb-xkb-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev kitty libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xfixes0-dev meson ninja-build uthash-dev
 
 # Dependencias de picom
-sudo apt install -y meson ninja-build
+sudo apt install -y libev-dev meson ninja-build uthash-dev
 
 # Creando directorio para repositorios
 mkdir ~/github && cd ~/github
@@ -67,13 +67,21 @@ curl -sS https://starship.rs/install.sh | sh
 cp -r $ruta/wallpapers ~/
 
 # Configurar polybar 
+rm -rf ~/.config/polybar
 mkdir ~/.config/polybar
 cp -r $ruta/config/polybar/* ~/.config/polybar/
 sudo cp -r ~/.config/polybar/fonts/* /usr/share/fonts/truetype/
 
+# Remover viejos directorios
+rm -rf ~/.config/picom
+rm -rf ~/.config/bspwm
+rm -rf ~/.config/kitty
+rm -rf ~/.config/kitty
+
 # Mover dot files
-mkdir ~/.config/{kitty,picom,polybar,bspwm,sxhkd,eww,starship,cava,bin,rofi}
-mkdir ~/{.cache,.local}
+mkdir ~/.config/{kitty,picom,bspwm,sxhkd,eww,starship,cava,bin,rofi}
+
+
 cp -r $ruta/config/kitty/* ~/.config/kitty/
 cp -r $ruta/config/bspwm/* ~/.config/bspwm/
 cp -r $ruta/config/sxhkd/* ~/.config/sxhkd/
@@ -96,6 +104,7 @@ sudo mkdir /usr/share/zsh-sudo && sudo cp -r $ruta/root/sudo.plugin.zsh /usr/sha
 # Mover root shell
 sudo cp -r $ruta/root/starship /root/.config/
 sudo cp -r $ruta/root/zshrc /root/.zshrc
+sudo cp -r $ruta/zshrc ~/.zshrc
 
 # Arreglando insecure files
 sudo chown root:root /usr/local/share/zsh/site-functions/_bspc
