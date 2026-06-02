@@ -33,12 +33,12 @@ sudo apt install -y \
     network-manager-tui curl fonts-font-awesome
 
 echo "[*] Instalando Starship si no existe"
-if ! command -v starship >/dev/null 2>&1; then
-    curl -sS https://starship.rs/install.sh | sh -s -- -y
-fi
+
+curl -sS https://starship.rs/install.sh | sh 
+
 
 echo "[*] Limpiando dots viejos"
-rm -rf \
+sudo rm -rf \
     "$HOME/.p10k.zsh" \
     "$HOME/.config/bspwm" \
     "$HOME/.config/bin" \
