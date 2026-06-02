@@ -1,7 +1,7 @@
 
 format = """
-[╭──](fg:#82E0FF) 󰋑  $username$directory $git_branch$git_status
-[╰──](fg:#82E0FF)$character"""
+[╭──](fg:#4AC6FF) 󰋑  $username$directory $git_branch$git_status
+[╰──](fg:#4AC6FF)$character"""
 
 command_timeout = 5001
 add_newline = true
@@ -15,9 +15,9 @@ Windows = " "
 Kali = "󰋑 "
 
 [username]
-style_user = "fg:#ffffff bold bg:#82E0FF bold"
+style_user = "fg:#ffffff bold bg:#4AC6FF bold"
 style_root = "#ffffff bold"
-format = "[](bold fg:#82E0FF)[$user]($style)[ ](bold fg:#82E0FF)"
+format = "[](bold fg:#4AC6FF)[$user]($style)[ ](bold fg:#4AC6FF)"
 disabled = false
 show_always = true
 
@@ -26,7 +26,7 @@ style = "bg:#1F1F1F fg:#ffffff"
 format = ' [](bold fg:#1F1F1F)[󰉋 $path]($style)[](bold fg:#1F1F1F)'
 
 [character]
-success_symbol = "[](bold fg:#82E0FF)"
+success_symbol = "[](bold fg:#4AC6FF)"
 error_symbol = "[](bold fg:red)"
 
 [git_branch]
