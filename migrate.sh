@@ -2,143 +2,113 @@
 
 set -e
 
-if [ "$(whoami)" = "root" ]; then
-    echo "[!] No ejecutes este script como root."
+if [ "$(whoami)" == "root" ]; then
+    echo "[!] No ejecutes este script como root"
     exit 1
 fi
 
-RUTA="$(pwd)"
-BACKUP="$HOME/.backup-kaliautobspwm-$(date +%Y%m%d-%H%M%S)"
+ruta=$(pwd)
+user=$(whoami)
+backup="$HOME/.backup-autobspwm-$(date +%Y%m%d-%H%M%S)"
 
-echo "[*] Creando backup en: $BACKUP"
-mkdir -p "$BACKUP"
+echo "[*] Creando backup en $backup"
+mkdir -p "$backup"
 
-backup_dir() {
-    if [ -e "$1" ]; then
-        cp -r "$1" "$BACKUP/"
-    fi
-}
+for dir in bspwm bin picom polybar rofi kitty eww starship cava sxhkd; do
+    [ -d "$HOME/.config/$dir" ] && cp -r "$HOME/.config/$dir" "$backup/"
+done
 
-echo "[*] Respaldando configuración vieja..."
-backup_dir "$HOME/.config/polybar"
-backup_dir "$HOME/.config/picom"
-backup_dir "$HOME/.config/bspwm"
-backup_dir "$HOME/.config/sxhkd"
-backup_dir "$HOME/.config/kitty"
-backup_dir "$HOME/.config/eww"
-backup_dir "$HOME/.config/starship"
-backup_dir "$HOME/.config/cava"
-backup_dir "$HOME/.config/rofi"
-backup_dir "$HOME/.zshrc"
+[ -f "$HOME/.zshrc" ] && cp "$HOME/.zshrc" "$backup/.zshrc"
+[ -f "$HOME/.p10k.zsh" ] && cp "$HOME/.p10k.zsh" "$backup/.p10k.zsh"
 
-sudo mkdir -p "$BACKUP/root"
-sudo cp -r /root/.zshrc "$BACKUP/root/" 2>/dev/null || true
-sudo cp -r /root/.config/starship "$BACKUP/root/" 2>/dev/null || true
+sudo mkdir -p "$backup/root"
+sudo cp /root/.zshrc "$backup/root/.zshrc" 2>/dev/null || true
+sudo cp /root/.p10k.zsh "$backup/root/.p10k.zsh" 2>/dev/null || true
 
-echo "[*] Instalando dependencias mínimas..."
+echo "[*] Instalando dependencias nuevas mínimas"
 sudo apt update
 sudo apt install -y \
-    zsh kitty polybar picom rofi dunst feh jq playerctl brightnessctl \
+    zsh kitty polybar picom rofi feh dunst jq playerctl brightnessctl \
     cava bat lsd fzf ranger maim imagemagick acpi network-manager \
-    network-manager-tui fonts-font-awesome curl
+    network-manager-tui curl fonts-font-awesome
 
-echo "[*] Instalando Starship si no existe..."
+echo "[*] Instalando Starship si no existe"
 if ! command -v starship >/dev/null 2>&1; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y
 fi
 
-echo "[*] Instalando EWW desde binario del repo..."
-if [ -f "$RUTA/config/eww/eww" ]; then
-    sudo cp "$RUTA/config/eww/eww" /usr/local/bin/eww
-    sudo chmod +x /usr/local/bin/eww
-elif [ -f "$RUTA/bin/eww" ]; then
-    sudo cp "$RUTA/bin/eww" /usr/local/bin/eww
-    sudo chmod +x /usr/local/bin/eww
-else
-    echo "[!] No encontré binario de eww. Ajusta la ruta en el script."
-fi
-
-echo "[*] Limpiando dots viejos necesarios..."
+echo "[*] Limpiando dots viejos"
 rm -rf \
-    "$HOME/.config/polybar" \
-    "$HOME/.config/picom" \
+    "$HOME/.p10k.zsh" \
     "$HOME/.config/bspwm" \
+    "$HOME/.config/bin" \
+    "$HOME/.config/picom" \
+    "$HOME/.config/polybar" \
+    "$HOME/.config/rofi" \
     "$HOME/.config/kitty" \
     "$HOME/.config/eww" \
     "$HOME/.config/starship" \
-    "$HOME/.config/cava" \
-    "$HOME/.config/rofi" \
-    "$HOME/.config/bin"
+    "$HOME/.config/cava"
 
+sudo rm -f /root/.p10k.zsh
+
+echo "[*] Copiando dots nuevos"
 mkdir -p "$HOME/.config"
 
-echo "[*] Copiando dots nuevos..."
-cp -r "$RUTA/config/polybar" "$HOME/.config/"
-cp -r "$RUTA/config/picom" "$HOME/.config/"
-cp -r "$RUTA/config/bspwm" "$HOME/.config/"
-cp -r "$RUTA/config/kitty" "$HOME/.config/"
-cp -r "$RUTA/config/eww" "$HOME/.config/"
-cp -r "$RUTA/config/starship" "$HOME/.config/"
-cp -r "$RUTA/config/cava" "$HOME/.config/"
-cp -r "$RUTA/config/rofi" "$HOME/.config/"
-cp -r "$RUTA/config/bin" "$HOME/.config/"
+cp -rv "$ruta/config/bspwm" "$HOME/.config/"
+cp -rv "$ruta/config/bin" "$HOME/.config/"
+cp -rv "$ruta/config/picom" "$HOME/.config/"
+cp -rv "$ruta/config/polybar" "$HOME/.config/"
+cp -rv "$ruta/config/rofi" "$HOME/.config/"
+cp -rv "$ruta/config/kitty" "$HOME/.config/"
+cp -rv "$ruta/config/eww" "$HOME/.config/"
+cp -rv "$ruta/config/starship" "$HOME/.config/"
+cp -rv "$ruta/config/cava" "$HOME/.config/"
 
-if [ -d "$RUTA/config/sxhkd" ]; then
-    rm -rf "$HOME/.config/sxhkd"
-    cp -r "$RUTA/config/sxhkd" "$HOME/.config/"
-fi
+[ -d "$ruta/config/sxhkd" ] && cp -rv "$ruta/config/sxhkd" "$HOME/.config/"
 
-if [ -d "$RUTA/wallpapers" ]; then
-    rm -rf "$HOME/wallpapers"
-    cp -r "$RUTA/wallpapers" "$HOME/"
-fi
+echo "[*] Copiando wallpapers/local/fonts"
+[ -d "$ruta/wallpapers" ] && cp -rv "$ruta/wallpapers" "$HOME/"
+[ -d "$ruta/local" ] && cp -rv "$ruta/local/"* "$HOME/.local/"
 
-if [ -d "$RUTA/local" ]; then
-    mkdir -p "$HOME/.local"
-    cp -r "$RUTA/local/"* "$HOME/.local/"
-fi
-
-echo "[*] Copiando fuentes..."
-if [ -d "$RUTA/fonts" ]; then
-    sudo mkdir -p /usr/local/share/fonts
-    sudo cp "$RUTA/fonts/"* /usr/local/share/fonts/
+if [ -d "$ruta/fonts" ]; then
+    sudo cp -rv "$ruta/fonts/"* /usr/local/share/fonts/
     fc-cache -fv
 fi
 
-echo "[*] Aplicando permisos..."
-find "$HOME/.config/bin" -type f -name "*.sh" -exec chmod +x {} \;
-chmod +x "$HOME/.config/bspwm/bspwmrc" 2>/dev/null || true
-chmod +x "$HOME/.config/polybar/"*.sh 2>/dev/null || true
+echo "[*] Copiando ZSH usuario/root"
+cp -v "$ruta/zshrc" "$HOME/.zshrc"
 
-echo "[*] Configurando ZSH usuario..."
-if [ -f "$RUTA/zshrc" ]; then
-    cp "$RUTA/zshrc" "$HOME/.zshrc"
-fi
-
-echo "[*] Configurando ZSH root..."
 sudo mkdir -p /root/.config
-if [ -d "$RUTA/root/starship" ]; then
-    sudo rm -rf /root/.config/starship
-    sudo cp -r "$RUTA/root/starship" /root/.config/
-fi
+sudo cp -v "$ruta/root/zshrc" /root/.zshrc
+sudo rm -rf /root/.config/starship
+sudo cp -rv "$ruta/root/starship" /root/.config/
 
-if [ -f "$RUTA/root/zshrc" ]; then
-    sudo cp "$RUTA/root/zshrc" /root/.zshrc
-fi
-
-if [ -f "$RUTA/root/sudo.plugin.zsh" ]; then
+if [ -f "$ruta/root/sudo.plugin.zsh" ]; then
     sudo mkdir -p /usr/share/zsh-sudo
-    sudo cp "$RUTA/root/sudo.plugin.zsh" /usr/share/zsh-sudo/sudo.plugin.zsh
+    sudo cp -v "$ruta/root/sudo.plugin.zsh" /usr/share/zsh-sudo/sudo.plugin.zsh
 fi
 
-echo "[*] Corrigiendo permisos de completions..."
+echo "[*] Instalando EWW binario si viene en el repo"
+if [ -f "$ruta/eww" ]; then
+    sudo cp "$ruta/eww" /usr/local/bin/eww
+elif [ -f "$ruta/config/eww/eww" ]; then
+    sudo cp "$ruta/config/eww/eww" /usr/local/bin/eww
+elif [ -f "$ruta/bin/eww" ]; then
+    sudo cp "$ruta/bin/eww" /usr/local/bin/eww
+fi
+
+sudo chmod +x /usr/local/bin/eww 2>/dev/null || true
+
+echo "[*] Aplicando permisos"
+chmod +x "$HOME/.config/bspwm/bspwmrc" 2>/dev/null || true
+chmod +x "$HOME/.config/bspwm/scripts/"* 2>/dev/null || true
+chmod +x "$HOME/.config/bin/"* 2>/dev/null || true
+chmod +x "$HOME/.config/polybar/launch.sh" 2>/dev/null || true
+sudo chown -R "$user:$user" "$HOME/.config"
+
 sudo chown root:root /usr/local/share/zsh/site-functions/_bspc 2>/dev/null || true
 
-echo "[*] Reiniciando servicios visuales..."
-pkill polybar 2>/dev/null || true
-pkill eww 2>/dev/null || true
-pkill picom 2>/dev/null || true
-
-echo "[✓] Migración completada."
-echo "[i] Backup guardado en: $BACKUP"
-echo "[i] Cierra sesión y vuelve a entrar en BSPWM."
+echo "[✓] Migración completada"
+echo "[i] Backup: $backup"
+echo "[i] Cierra sesión y vuelve a entrar a BSPWM"
