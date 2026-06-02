@@ -21,6 +21,7 @@ $blue: #7AA2F7;
 $magenta: #BB9AF7;
 $cyan: #7DCFFF;
 $white: $foreground;
+$cinn: #0077B6;
 
 // EWW BAR
 .eww_bar{
@@ -30,7 +31,7 @@ $white: $foreground;
 
 // Launcher
 .launcher_icon{
-    color: $magenta;
+    color: $cinn;
     font-family: "Font Awesome 6 Pro";
     font-size: 1.7em;
     padding: 1rem 0 1rem 0;
@@ -56,7 +57,7 @@ color: $gray;
 
 /* Occupied */
 .01, .02, .03, .04, .05, .06 {
-  color: $magenta;
+  color: $cinn;
 }
 
 /* Focused */
@@ -116,19 +117,19 @@ border-radius: 5px;
   font-family: JetBrainsMono Nerd Font;
   font-size: 1.2em;
   padding-right: .5rem;
-  color: $magenta;
+  color: $cinn;
 }
 .wifi-icon{
   margin-bottom: .2rem;
-  color: $magenta;
+  color: $cinn;
 }
 .brightness-icon{
   margin: .2rem 0 .2rem 0;
-  color: $magenta;
+  color: $cinn;
 }
 .volume-icon{
   margin: .2rem 0 .2rem 0;
-  color: $magenta;
+  color: $cinn;
 }
 scale trough {
   all: unset;
@@ -153,7 +154,7 @@ scale trough {
   font-weight: bold;
   font-size: 1.2em;
   background-color: $black;
-  color: $magenta;
+  color: $cinn;
   border-radius: 5px;
   padding: .7rem 0 .5rem 0;
   margin: .5rem 0 .5rem 0;
@@ -190,11 +191,11 @@ font-weight: bold;
 }
 
 calendar.button {
-color: $magenta;
+color: $cinn;
 }
 
 calendar.highlight {
-color: $magenta;
+color: $cinn;
 font-weight: bold;
 }
 
@@ -214,17 +215,17 @@ color: $background;
 }
 .button-off{
   margin-bottom: .5rem;
-  color: $magenta;
+  color: $cinn;
 }
 .button-bspres{
-  color: $magenta;
+  color: $cinn;
 }
 .button-reb{
-  color: $magenta
+  color: $cinn;
 }
 .button-quit{
-  color: $magenta;
+  color: $cinn;
 }
 .button-lock{
-  color: $magenta;
+  color: $cinn;
 }
