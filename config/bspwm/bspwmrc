@@ -21,7 +21,7 @@ bspc rule -a Screenkey manage=off
 
 # Wallpaper
 
-feh --bg-fill ~/wallpapers/wall-06.png
+feh --bg-fill ~/wallpapers/wall-00.png
 
 
 # Startup, clipboard & error fixes
